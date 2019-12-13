@@ -53,6 +53,7 @@ RUN set -x \
     && chown --recursive sonarqube:sonarqube "$SONARQUBE_HOME" "$SONARQUBE_PUBLIC_HOME"
     
 RUN wget -P /opt/sonarqube/extensions/plugins/ https://github.com/Backelite/sonar-swift/releases/download/0.4.5/backelite-sonar-swift-plugin-0.4.5.jar
+RUN chmod +x bin/docker-entrypoint.sh
     
 
 COPY --chown=sonarqube:sonarqube run.sh "$SONARQUBE_HOME/bin/"
