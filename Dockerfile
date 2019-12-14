@@ -1,8 +1,7 @@
 FROM openjdk:11-jre-slim
 
 RUN apt-get update \
-    && apt-get install -y curl unzip \
-    && apt-get install -y wget \
+    && apt-get install -y curl unzip wget \
     && rm -rf /var/lib/apt/lists/*
 
 # Http port
@@ -51,9 +50,6 @@ RUN set -x \
     && ln -s "$SONARQUBE_PUBLIC_HOME/logs" "$SONARQUBE_HOME/logs" \
     && ln -s "$SONARQUBE_PUBLIC_HOME/data" "$SONARQUBE_HOME/data" \
     && chown --recursive sonarqube:sonarqube "$SONARQUBE_HOME" "$SONARQUBE_PUBLIC_HOME"
-    
-RUN wget -P /opt/sonarqube/extensions/plugins/ https://github.com/Backelite/sonar-swift/releases/download/0.4.5/backelite-sonar-swift-plugin-0.4.5.jar
-RUN chmod +x bin/docker-entrypoint.sh
     
 
 COPY --chown=sonarqube:sonarqube run.sh "$SONARQUBE_HOME/bin/"
